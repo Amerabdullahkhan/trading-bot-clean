@@ -4,9 +4,10 @@ from app.broker.paper_broker import PaperBroker
 from app.config import get_settings
 from app.data.provider import SyntheticMarketDataProvider
 from app.engine.signal_engine import SignalEngine
+from app.equity_curve import print_equity_curve
 from app.risk.risk_manager import RiskManager
-from app.trade_summary import print_trade_summary
 from app.trade_metrics import print_trade_metrics
+from app.trade_summary import print_trade_summary
 
 class ConsoleDashboard:
     def __init__(self, symbols: list[str]):
@@ -46,6 +47,7 @@ class ConsoleDashboard:
 
         print_trade_summary()
         print_trade_metrics()
+        print_equity_curve()
 
 if __name__ == "__main__":
     settings = get_settings()
