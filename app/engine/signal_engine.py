@@ -5,6 +5,8 @@ from dataclasses import dataclass
 from app.broker.paper_broker import PaperBroker
 from app.risk.risk_manager import RiskManager
 from app.strategies.ensemble import StrategyDecision, StrategyEnsemble
+from app.trade_logger import log_trade
+
 
 
 @dataclass
@@ -48,6 +50,7 @@ class SignalEngine:
     def execute_from_idea(self, idea: TradeIdea) -> str:
         if idea.action != "EXECUTE":
             return f"Signal for {idea.symbol} skipped: {idea.risk['reason']}"
+
         order = self.broker.place_order(
             symbol=idea.symbol,
             side=idea.strategy.side,
@@ -55,4 +58,14 @@ class SignalEngine:
             reason=",".join(idea.strategy.reasons),
             price=None,
         )
+
+        log_trade(
+            symbol=order.symbol,
+            side=order.side,
+            quantity=order.quantity,
+            reason=order.reason,
+            price=order.price,
+            status="executed",
+        )
+
         return f"Order placed: {order.side} {order.symbol} qty={order.quantity}"
