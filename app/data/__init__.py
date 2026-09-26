@@ -1,1 +1,1 @@
-﻿"""Data storage for market data."""
+"""Data storage for market data."""

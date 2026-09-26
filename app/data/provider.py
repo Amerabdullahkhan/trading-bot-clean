@@ -1,10 +1,11 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import math
 import random
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import List
+
 
 @dataclass
 class Candle:
@@ -15,9 +16,11 @@ class Candle:
     close: float
     volume: float = 0.0
 
+
 class MarketDataProvider:
     def get_history(self, symbol: str, periods: int = 200) -> List[Candle]:
         raise NotImplementedError
+
 
 class SyntheticMarketDataProvider(MarketDataProvider):
     def __init__(self, base_prices: dict[str, float] | None = None):

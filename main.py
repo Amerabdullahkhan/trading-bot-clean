@@ -1,10 +1,11 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from app.broker.paper_broker import PaperBroker
 from app.config import get_settings
 from app.data.provider import SyntheticMarketDataProvider
 from app.engine.signal_engine import SignalEngine
 from app.risk.risk_manager import RiskManager
+
 
 def main() -> None:
     settings = get_settings()
@@ -22,6 +23,7 @@ def main() -> None:
     )
 
     ideas = engine.scan(settings.default_symbols)
+
     print("Market scan results")
     print("=" * 120)
     for idea in ideas:
@@ -35,6 +37,7 @@ def main() -> None:
     for idea in ideas:
         if idea.action == "EXECUTE":
             print(engine.execute_from_idea(idea))
+
 
 if __name__ == "__main__":
     main()

@@ -1,10 +1,11 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from app.broker.paper_broker import PaperBroker
 from app.config import get_settings
 from app.data.provider import SyntheticMarketDataProvider
 from app.engine.signal_engine import SignalEngine
 from app.risk.risk_manager import RiskManager
+
 
 class ConsoleDashboard:
     def __init__(self, symbols: list[str]):
@@ -35,6 +36,7 @@ class ConsoleDashboard:
         for idea in ideas:
             if idea.action == "EXECUTE":
                 print(self.engine.execute_from_idea(idea))
+
 
 if __name__ == "__main__":
     settings = get_settings()

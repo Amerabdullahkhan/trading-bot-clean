@@ -1,7 +1,8 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import os
 from dataclasses import dataclass, field
+
 
 @dataclass
 class Settings:
@@ -25,6 +26,7 @@ class Settings:
             default_symbols=[s.strip() for s in symbols_raw.split(",") if s.strip()],
             timeframe=os.getenv("TIMEFRAME", "1h"),
         )
+
 
 def get_settings() -> Settings:
     return Settings.from_env()

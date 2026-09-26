@@ -1,9 +1,10 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from dataclasses import dataclass, field
 from typing import Any
 
 from app.strategies.indicators import market_features
+
 
 @dataclass
 class StrategyDecision:
@@ -12,6 +13,7 @@ class StrategyDecision:
     confidence: float
     reasons: list[str] = field(default_factory=list)
     strategy_scores: dict[str, float] = field(default_factory=dict)
+
 
 class StrategyEnsemble:
     def __init__(self, min_confidence: float = 0.55):

@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from dataclasses import dataclass
 
@@ -6,12 +6,14 @@ from app.broker.paper_broker import PaperBroker
 from app.risk.risk_manager import RiskManager
 from app.strategies.ensemble import StrategyDecision, StrategyEnsemble
 
+
 @dataclass
 class TradeIdea:
     symbol: str
     strategy: StrategyDecision
     risk: dict
     action: str
+
 
 class SignalEngine:
     def __init__(self, provider, risk_manager: RiskManager, broker: PaperBroker, min_confidence: float = 0.55):

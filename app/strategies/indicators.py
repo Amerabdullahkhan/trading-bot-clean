@@ -1,6 +1,7 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import pandas as pd
+
 
 def to_dataframe(candles):
     data = pd.DataFrame(
@@ -21,15 +22,18 @@ def to_dataframe(candles):
     data = data.sort_values("timestamp").reset_index(drop=True)
     return data
 
+
 def ema(series: pd.Series, period: int) -> float:
     if series.empty:
         return 0.0
     return float(series.ewm(span=period, adjust=False).mean().iloc[-1])
 
+
 def sma(series: pd.Series, period: int) -> float:
     if series.empty:
         return 0.0
     return float(series.tail(period).mean())
+
 
 def rsi(series: pd.Series, period: int = 14) -> float:
     if series.empty:
@@ -43,6 +47,7 @@ def rsi(series: pd.Series, period: int = 14) -> float:
     val = 100 - (100 / (1 + rs))
     return float(val.iloc[-1])
 
+
 def macd_histogram(series: pd.Series) -> float:
     if series.empty:
         return 0.0
@@ -51,6 +56,7 @@ def macd_histogram(series: pd.Series) -> float:
     macd = fast - slow
     signal = macd.ewm(span=9, adjust=False).mean()
     return float((macd - signal).iloc[-1])
+
 
 def bollinger_bands(series: pd.Series, period: int = 20, std_dev: int = 2):
     if series.empty:
@@ -62,6 +68,7 @@ def bollinger_bands(series: pd.Series, period: int = 20, std_dev: int = 2):
     lower = mid - std_dev * std
     return float(mid), float(upper), float(lower)
 
+
 def atr(high: pd.Series, low: pd.Series, close: pd.Series, period: int = 14) -> float:
     if high.empty:
         return 0.0
@@ -71,6 +78,7 @@ def atr(high: pd.Series, low: pd.Series, close: pd.Series, period: int = 14) -> 
     lc = (df["low"] - df["close"].shift(1)).abs()
     true_range = pd.concat([hl, hc, lc], axis=1).max(axis=1)
     return float(true_range.rolling(window=period).mean().iloc[-1])
+
 
 def market_features(candles):
     df = to_dataframe(candles)

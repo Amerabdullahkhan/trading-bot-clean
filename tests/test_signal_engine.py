@@ -1,9 +1,10 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from app.broker.paper_broker import PaperBroker
 from app.data.provider import SyntheticMarketDataProvider
 from app.engine.signal_engine import SignalEngine
 from app.risk.risk_manager import RiskManager
+
 
 def test_signal_engine_generates_actions():
     provider = SyntheticMarketDataProvider()
