@@ -6,6 +6,7 @@ from app.data.provider import SyntheticMarketDataProvider
 from app.engine.signal_engine import SignalEngine
 from app.risk.risk_manager import RiskManager
 from app.trade_summary import print_trade_summary
+from app.trade_metrics import print_trade_metrics
 
 class ConsoleDashboard:
     def __init__(self, symbols: list[str]):
@@ -44,6 +45,7 @@ class ConsoleDashboard:
                 print(self.engine.execute_from_idea(idea))
 
         print_trade_summary()
+        print_trade_metrics()
 
 if __name__ == "__main__":
     settings = get_settings()
